@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacker's Paradise</title>
+    <title>Welcome to Cultware</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #000;
-            color: #0f0;
+            color: #aaa; /* Changed to gray */
             font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
         }
@@ -18,7 +18,7 @@
             text-align: center;
             margin-top: 20px;
             font-size: 3rem;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            text-shadow: 0 0 10px #aaa, 0 0 20px #aaa;
         }
 
         .button {
@@ -26,22 +26,22 @@
             margin: 30px auto;
             padding: 20px 40px;
             font-size: 20px;
-            color: #0f0;
+            color: #aaa; /* Changed to gray */
             background: #000;
-            border: 2px solid #0f0;
+            border: 2px solid #aaa; /* Changed to gray */
             border-radius: 5px;
             text-align: center;
-            text-shadow: 0 0 5px #0f0;
+            text-shadow: 0 0 5px #aaa; /* Changed to gray */
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 20px rgba(170, 170, 170, 0.5);
             transition: all 0.3s ease;
         }
 
         .button:hover {
-            background: #0f0;
+            background: #aaa; /* Gray hover effect */
             color: #000;
             text-shadow: none;
-            box-shadow: 0 0 25px #0f0, 0 0 50px #0f0;
+            box-shadow: 0 0 25px #aaa, 0 0 50px #aaa;
         }
 
         /* Small buttons at the bottom */
@@ -57,24 +57,24 @@
         .small-button {
             padding: 10px 20px;
             font-size: 14px;
-            color: #0f0;
+            color: #aaa; /* Changed to gray */
             background: #000;
-            border: 2px solid #0f0;
+            border: 2px solid #aaa; /* Changed to gray */
             border-radius: 5px;
-            text-shadow: 0 0 5px #0f0;
+            text-shadow: 0 0 5px #aaa; /* Changed to gray */
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            box-shadow: 0 0 10px rgba(170, 170, 170, 0.5);
             transition: all 0.3s ease;
         }
 
         .small-button:hover {
-            background: #0f0;
+            background: #aaa; /* Gray hover effect */
             color: #000;
             text-shadow: none;
-            box-shadow: 0 0 25px #0f0, 0 0 50px #0f0;
+            box-shadow: 0 0 25px #aaa, 0 0 50px #aaa;
         }
 
-        /* Matrix rain and fireworks canvases */
+        /* Matrix rain canvas */
         canvas {
             position: fixed;
             top: 0;
@@ -83,22 +83,35 @@
             height: 100%;
             z-index: -1;
         }
+
+        /* Audio player styling */
+        audio {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Hacker's Paradise</h1>
+    <h1>Welcome to Cultware</h1>
     <button class="button" onclick="downloadFile()">Download the File</button>
 
     <!-- Small buttons -->
     <div class="small-buttons">
         <button class="small-button" onclick="window.location.href='https://dsc.gg/cultware'">Discord</button>
-        <button class="small-button" onclick="window.location.href='https://youtube.com/borkocs'">YouTube</button>
+        <button class="small-button" onclick="window.location.href='https://youtube.com/realborko'">YouTube</button>
         <button class="small-button" onclick="window.location.href='https://github.com/517k'">GitHub</button>
     </div>
 
-    <!-- Canvases -->
+    <!-- Matrix Rain Canvas -->
     <canvas id="matrix-canvas"></canvas>
-    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- Background Music -->
+    <audio controls autoplay loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
         // MATRIX RAIN EFFECT
@@ -121,7 +134,7 @@
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
 
-            ctx.fillStyle = '#0f0';
+            ctx.fillStyle = '#aaa'; // Changed to gray
             ctx.font = `${fontSize}px Courier New`;
 
             drops.forEach((y, index) => {
@@ -139,71 +152,6 @@
         }
 
         setInterval(drawMatrix, 50);
-
-        // FIREWORKS EFFECT
-        const fireworksCanvas = document.getElementById('fireworks-canvas');
-        const fireCtx = fireworksCanvas.getContext('2d');
-        fireworksCanvas.width = window.innerWidth;
-        fireworksCanvas.height = window.innerHeight;
-
-        class Firework {
-            constructor(x, y, color) {
-                this.x = x;
-                this.y = y;
-                this.color = color;
-                this.particles = Array.from({ length: 50 }, () => ({
-                    x: this.x,
-                    y: this.y,
-                    angle: Math.random() * Math.PI * 2,
-                    speed: Math.random() * 3 + 2,
-                    decay: 0.98,
-                    size: Math.random() * 2 + 1,
-                }));
-            }
-
-            update() {
-                this.particles.forEach(particle => {
-                    particle.x += Math.cos(particle.angle) * particle.speed;
-                    particle.y += Math.sin(particle.angle) * particle.speed;
-                    particle.speed *= particle.decay;
-                });
-            }
-
-            draw() {
-                this.particles.forEach(particle => {
-                    fireCtx.beginPath();
-                    fireCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    fireCtx.fillStyle = this.color;
-                    fireCtx.fill();
-                });
-            }
-        }
-
-        const fireworks = [];
-        function addFirework() {
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            const x = Math.random() * fireworksCanvas.width;
-            const y = Math.random() * fireworksCanvas.height / 2;
-            fireworks.push(new Firework(x, y, color));
-        }
-
-        function animateFireworks() {
-            fireCtx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-
-            fireworks.forEach((firework, index) => {
-                firework.update();
-                firework.draw();
-                if (firework.particles.every(p => p.speed < 0.1)) {
-                    fireworks.splice(index, 1);
-                }
-            });
-
-            requestAnimationFrame(animateFireworks);
-        }
-
-        for (let i = 0; i < 5; i++) addFirework(); // Initial fireworks
-        animateFireworks();
 
         // File Download Function
         function downloadFile() {
