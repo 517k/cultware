@@ -83,14 +83,6 @@
             height: 100%;
             z-index: -1;
         }
-
-        /* Audio player styling */
-        audio {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            z-index: 100;
-        }
     </style>
 </head>
 <body>
@@ -108,7 +100,7 @@
     <canvas id="matrix-canvas"></canvas>
 
     <!-- Background Music -->
-    <audio controls autoplay loop>
+    <audio autoplay loop style="display: none;">
         <source src="https://files.catbox.moe/cfqfrp.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
